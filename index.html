@@ -54,6 +54,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .refl{transition:fill .3s,filter .3s}
 .card:hover .refl-t,.lit .refl-t{fill:#EEF3FA!important}
 .card:hover .refl-g,.lit .refl-g{filter:drop-shadow(0 0 6px rgba(220,235,255,.9))}
+.tile.ph{background:#E4E2DD}
+.tile.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .4s}
+.tile.ph img.pk{object-fit:contain}
+.tile.ph img.alt{opacity:0}
+.card:hover .tile.ph img{transform:scale(1.03)}
+.card:hover .tile.ph img.alt{opacity:1}
+@media (hover:none){.card .tile.ph img.alt{display:none}}
 
 .banner{position:relative;background:var(--ink);color:var(--paper);min-height:min(78vh,720px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;overflow:hidden;padding:80px var(--pad)}
 .banner .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--script);font-size:clamp(180px,38vw,620px);color:#1D1C1A;white-space:nowrap;transform:rotate(-9deg);pointer-events:none;user-select:none;line-height:1}
@@ -78,7 +85,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .coll .t{position:absolute;left:0;right:0;bottom:18px;font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .coll .tile.dark + .t,.coll.d .t{color:var(--paper)}
 
-.rail{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 var(--pad) 8px;scrollbar-width:none}
+.rail{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--pad);padding:0 var(--pad) 8px;scrollbar-width:none}
 .rail::-webkit-scrollbar{display:none}
 .rail .card{flex:0 0 clamp(210px,23vw,330px);scroll-snap-align:start}
 .arrows{display:flex;gap:8px}
@@ -113,6 +120,24 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 .pd ul{margin:0;padding-left:18px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
 .pd .small{font-size:12px;color:var(--muted)}
 .x{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;z-index:2}
+.gal{position:relative;aspect-ratio:4/5;background:#E4E2DD;overflow:hidden;min-width:0}
+@media (min-width:721px){.pd .gal{aspect-ratio:auto;height:min(86vh,680px)}}
+.gal .track{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.gal .track::-webkit-scrollbar{display:none}
+.gal .track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;object-position:50% 25%;scroll-snap-align:start;display:block}
+.gal .track img.pk{object-fit:contain}
+.gal .nav-b{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.9)}
+.gal .nav-b:hover{background:var(--ink);color:var(--paper)}
+.gal .pv{left:10px}.gal .nx{right:10px}
+.gal .dots{position:absolute;left:0;right:0;bottom:12px;display:flex;justify-content:center;gap:6px}
+.gal .dots button{width:7px;height:7px;padding:0;border-radius:50%;border:0;background:rgba(14,14,13,.28)}
+.gal .dots button[aria-current="true"]{background:var(--ink)}
+.look .lk{flex:0 0 clamp(220px,26vw,380px);scroll-snap-align:start;border:0;padding:0;background:none;text-align:left;display:flex;flex-direction:column;gap:10px}
+.look .lk .ph{position:relative;aspect-ratio:2/3;overflow:hidden;background:#E4E2DD}
+.look .lk img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.look .lk:hover img{transform:scale(1.03)}
+.look .lk span{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.look .lk small{display:block;font-size:10px;color:var(--muted);font-weight:500;margin-top:2px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -160,6 +185,13 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
   <section class="rail" id="rail" aria-label="Todos os produtos do drop 001"></section>
   <div class="center"><a class="btn k" href="#loja">Ver tudo</a></div>
 
+  <div class="sec-h" id="lookbook-h">
+    <h2>Lookbook<span>Coleção Sombra</span></h2>
+    <div class="arrows"><button id="lbPrev" aria-label="Foto anterior do lookbook">←</button><button id="lbNext" aria-label="Próxima foto do lookbook">→</button></div>
+  </div>
+  <section class="rail look" id="lookbook" aria-label="Lookbook da Coleção Sombra"></section>
+  <div style="height:48px"></div>
+
   <section class="insta">
     <h2>Acompanhe o drop</h2>
     <div class="handle">@useheadtuff</div>
@@ -193,6 +225,27 @@ const P=[
  {id:'lavado',n:'Sombra Lavado',k:'Boné lavado',p:149,crown:'#3A3835',thread:'#6C6862',rope:'#E0CFA8',wash:1,d:'Preto estonado com aba desfiada. Cara de boné usado há anos.'},
  {id:'flash',n:'Sombra Flash',k:'Edição numerada · 50 unidades',p:179,crown:'#121212',thread:'#2C2C2C',rope:'#2C2C2C',refl:1,big:1,dark:1,flag:'Numerado',d:'Cursiva gigante em linha refletiva. No escuro some, no flash da câmera acende.'}
 ];
+// Fotos reais em img/. pk = packshot (com as cores do fundo para preencher as faixas), m = quantas fotos de modelo.
+// Bonés sem entrada aqui (como o Flash) continuam com a ilustração em SVG.
+const IMG={
+ preto:{pk:['#F7F7F7','#F8F8F8'],m:3},
+ osso:{pk:['#C4C4C6','#DFDEE0'],m:3},
+ marinho:{pk:['#CCCCCC','#E6E6E6'],m:3},
+ garrafa:{m:1},
+ lavado:{m:3}
+};
+const pics=id=>{const g=IMG[id],a=[];if(!g)return a;if(g.pk)a.push({f:id+'-packshot',pk:g.pk});for(let i=1;i<=g.m;i++)a.push({f:`${id}-modelo-${i}`});return a};
+const src=(f,sizes)=>`src="img/${f}-sm.webp" srcset="img/${f}-sm.webp 640w, img/${f}.webp 1600w" sizes="${sizes}"`;
+const altOf=(id,p)=>{const n=P.find(x=>x.id===id).n;return p.pk?`Boné ${n} em foto de estúdio`:`Modelo usando o boné ${n}`};
+const pkAttr=p=>p.pk?` class="pk" style="background:linear-gradient(${p.pk[0]},${p.pk[1]})"`:'';
+const phId=o=>o.ph||o.id;
+const hasPh=o=>pics(phId(o)).length>0;
+function visual(o,sizes){
+  const id=phId(o), ps=pics(id); if(!ps.length) return cap(o);
+  const [a,b]=ps;
+  return `<img ${src(a.f,sizes)}${pkAttr(a)} alt="${altOf(id,a)}" loading="lazy" decoding="async">`+
+    (b?`<img ${src(b.f,sizes)} class="alt" alt="" aria-hidden="true" loading="lazy" decoding="async">`:'');
+}
 let uid=0;
 function cap(o){
   const i=uid++, brim='M62,204 Q200,238 338,204 C354,232 318,272 200,276 C82,272 46,232 62,204 Z',
@@ -221,25 +274,29 @@ function cap(o){
 }
 const brl=v=>'R$ '+v.toFixed(2).replace('.',',');
 const card=o=>`<button class="card" data-id="${o.id}" aria-label="${o.n}, ${o.pl||brl(o.p)}">
-  <div class="tile${o.dark?' dark':''}">${o.flag?`<span class="flag">${o.flag}</span>`:''}${cap(o)}</div>
+  <div class="tile${o.dark?' dark':''}${hasPh(o)?' ph':''}">${visual(o,'(max-width:900px) 50vw, 25vw')}${o.flag?`<span class="flag">${o.flag}</span>`:''}</div>
   <h3>${o.n}</h3><span class="kind">${o.k}</span><span class="price">${o.pl||brl(o.p)}</span></button>`;
 const by=id=>P.find(p=>p.id===id);
 
 const order=['preto','flash','osso','marinho','garrafa','lavado'];
 document.getElementById('loja').innerHTML=order.map(id=>card(by(id))).join('')+
-  card({...by('preto'),k:'Leve 2 por R$ 239,00',n:'Combo 2 bonés',p:239,id:'combo',flag:'Oferta'})+
-  card({...by('osso'),k:'Em breve',n:'Lista VIP',pl:'Acesso 1h antes',id:'vip'});
+  card({...by('preto'),k:'Leve 2 por R$ 239,00',n:'Combo 2 bonés',p:239,id:'combo',ph:'preto',flag:'Oferta'})+
+  card({...by('osso'),k:'Em breve',n:'Lista VIP',pl:'Acesso 1h antes',id:'vip',ph:'osso'});
 document.getElementById('rail').innerHTML=P.map(card).join('');
 document.getElementById('heroCap').innerHTML=cap(by('flash'));
 document.getElementById('colecoes').innerHTML=[
   ['01','Sombra',by('osso'),''],['02','Flash',by('flash'),' d'],['03','Todos os bonés',by('garrafa'),'']
-].map(c=>`<a class="coll${c[3]}" href="#loja"><div class="tile${c[2].dark?' dark':''}">${cap(c[2])}</div><span class="n">${c[0]}</span><span class="t">${c[1]}</span></a>`).join('');
+].map(c=>`<a class="coll${c[3]}" href="#loja"><div class="tile${c[2].dark?' dark':''}${hasPh(c[2])?' ph':''}">${visual(c[2],'(max-width:720px) 100vw, 33vw')}</div><span class="n">${c[0]}</span><span class="t">${c[1]}</span></a>`).join('');
 
 const dlg=document.getElementById('dlg'), body=document.getElementById('dlgBody');
 function open(id){
   if(id==='vip'){window.open('https://ig.me/m/useheadtuff','_blank','noopener');return}
-  const combo=id==='combo', o=combo?by('preto'):by(id);
-  body.innerHTML=`<div class="tile${o.dark?' dark':''} lit">${cap(o)}</div><div class="body">
+  const combo=id==='combo', o=combo?by('preto'):by(id), ps=pics(o.id);
+  const media=ps.length?`<div class="gal"><div class="track" tabindex="0" aria-label="Fotos do ${o.n}">${ps.map((p,i)=>
+      `<img ${src(p.f,'(max-width:720px) 94vw, 520px')}${pkAttr(p)} alt="${altOf(o.id,p)}"${i?' loading="lazy"':''} decoding="async">`).join('')}</div>${ps.length>1?
+      `<button class="nav-b pv" aria-label="Foto anterior">←</button><button class="nav-b nx" aria-label="Próxima foto">→</button><div class="dots">${ps.map((_,i)=>`<button aria-label="Foto ${i+1} de ${ps.length}"${i?'':' aria-current="true"'}></button>`).join('')}</div>`:''}</div>`
+    :`<div class="tile${o.dark?' dark':''} lit">${cap(o)}</div>`;
+  body.innerHTML=`${media}<div class="body">
    <span class="kind up" style="font-size:11px;color:var(--muted)">Drop 001 · ${combo?'Oferta de lançamento':o.k}</span>
    <h3 id="dlgTitle">${combo?'Combo 2 bonés':o.n}</h3>
    <div class="price">${brl(combo?239:o.p)}</div>
@@ -248,13 +305,30 @@ function open(id){
    <a class="btn k" style="text-align:center" href="https://ig.me/m/useheadtuff" target="_blank" rel="noopener">Reservar pelo Instagram</a>
    <span class="small">O drop ainda não abriu. Quem entra na lista VIP compra uma hora antes do público. Pix com 5% de desconto ou 3x sem juros.</span></div>`;
   dlg.showModal();
+  const t=body.querySelector('.track');
+  if(t&&ps.length>1){
+    const dots=[...body.querySelectorAll('.dots button')];
+    const go=i=>t.scrollTo({left:t.clientWidth*Math.max(0,Math.min(ps.length-1,i)),behavior:'smooth'});
+    const cur=()=>Math.round(t.scrollLeft/t.clientWidth);
+    body.querySelector('.pv').onclick=()=>go(cur()-1);
+    body.querySelector('.nx').onclick=()=>go(cur()+1);
+    dots.forEach((d,i)=>d.onclick=()=>go(i));
+    t.addEventListener('scroll',()=>{const c=cur();dots.forEach((d,i)=>d.setAttribute('aria-current',i===c?'true':'false'))},{passive:true});
+    t.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(cur()+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(cur()-1)}});
+  }
 }
-document.addEventListener('click',e=>{const c=e.target.closest('.card');if(c)open(c.dataset.id)});
+// Lookbook: todas as fotos de modelo, alternando os bonés.
+const LB=[['preto',1],['marinho',1],['garrafa',1],['lavado',1],['osso',1],['preto',2],['marinho',2],['lavado',2],['osso',2],['preto',3],['marinho',3],['lavado',3],['osso',3]];
+document.getElementById('lookbook').innerHTML=LB.map(([id,i])=>{const o=by(id);
+  return `<button class="lk" data-id="${id}" aria-label="Ver o boné ${o.n}"><div class="ph"><img ${src(`${id}-modelo-${i}`,'(max-width:900px) 70vw, 26vw')} alt="Modelo usando o boné ${o.n}" loading="lazy" decoding="async"></div><span>${o.n}<small>${brl(o.p)}</small></span></button>`}).join('');
+document.addEventListener('click',e=>{const c=e.target.closest('.card,.lk');if(c)open(c.dataset.id)});
 document.getElementById('dlgClose').onclick=()=>dlg.close();
 dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
-const rail=document.getElementById('rail');
-document.getElementById('prev').onclick=()=>rail.scrollBy({left:-rail.clientWidth*.8,behavior:'smooth'});
-document.getElementById('next').onclick=()=>rail.scrollBy({left:rail.clientWidth*.8,behavior:'smooth'});
+const arrows=(r,p,n)=>{const el=document.getElementById(r);
+  document.getElementById(p).onclick=()=>el.scrollBy({left:-el.clientWidth*.8,behavior:'smooth'});
+  document.getElementById(n).onclick=()=>el.scrollBy({left:el.clientWidth*.8,behavior:'smooth'})};
+arrows('rail','prev','next');
+arrows('lookbook','lbPrev','lbNext');
 </script>
 </body>
 </html>

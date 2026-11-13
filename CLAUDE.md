@@ -38,17 +38,8 @@ Todas as fotos usam o mesmo estúdio: fundo cinza quente sem emenda, softbox sua
 Os prompts de foto seguem a skill `.claude/skills/sketch-to-studio-product`.
 
 ## Site
-- `index.html` é o site inteiro, sem etapa de build. Os bonés hoje são ilustrações em SVG geradas pelo script do próprio arquivo (lista `P`).
-- Ordem das seções, inspirada no Wants and Needs: barra preta de aviso, menu com logo no centro, grade de produtos, banner "001 em breve", coleções 01/02/03, banner "Cabeça dura", carrossel "001 Todos os produtos", Instagram, faixa de promessas e rodapé.
-- Ainda não há carrinho. Todo botão de compra leva ao Direct do Instagram (`https://ig.me/m/useheadtuff`).
-- **Publicação:** projeto `headtuff` na Vercel, ligado a este repositório. Cada envio para a branch `main` vai ao ar sozinho em headtuff.com. O `.vercelignore` impede que a pasta `.claude` e o README sejam publicados.
-
-## Próxima tarefa
-O usuário tem uma pasta **HeadTuff** no computador com as imagens geradas: fotos dos bonés e fotos dos modelos usando os bonés. Pedido:
-
-1. Copiar as imagens para `img/` neste repositório, com nomes claros, como `preto-packshot.webp` e `preto-modelo-1.webp`. Converter para WebP com largura máxima de cerca de 1600 px, para o site carregar rápido.
-2. Trocar as ilustrações SVG pelas fotos reais nos cards de produto e no detalhe do produto.
-3. Na janela de detalhe de cada boné, colocar um **carrossel** com o packshot e as fotos do modelo correspondente.
-4. Criar no site uma seção de **lookbook em carrossel** com os modelos usando os bonés.
-5. Manter as ilustrações SVG como reserva para os bonés que ainda não têm foto, como o Sombra Flash.
-6. Conferir no computador e no celular, fazer commit e enviar para a `main`. Depois, confirmar que headtuff.com atualizou.
+- `index.html` é o site inteiro, sem etapa de build. Os dados dos bonés ficam na lista `P` do script.
+- Fotos reais em `img/`, em WebP: `<boné>-packshot.webp` e `<boné>-modelo-N.webp` (até 1600 px de largura) e uma versão `-sm` de 640 px para cards e carrosséis. O objeto `IMG` no script diz quais fotos cada boné tem. Boné sem entrada em `IMG` (hoje o Sombra Flash) cai na ilustração SVG de reserva.
+- Para adicionar foto: converter para WebP nas duas larguras, salvar em `img/` com esse padrão de nome e atualizar `IMG` (e a lista `LB` do lookbook, se for foto de modelo).
+- Ordem das seções, inspirada no Wants and Needs: barra preta de aviso, menu com logo no centro, grade de produtos, banner "001 em breve", coleções ## Última tarefa concluída (13/11/2026)
+Fotos reais no site: 16 imagens em `img/` (packshots de Preto, Osso e Marinho; fotos de modelo de Preto, Osso, Marinho, Garrafa e Lavado), fotos nos cards, carrossel no detalhe de cada boné e seção de lookbook. Ainda faltam: packshot do Garrafa e do Lavado, e todas as fotos do Sombra Flash.
