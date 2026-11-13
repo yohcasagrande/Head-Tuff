@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Headtuff · Bonés · Drop 001</title>
+<meta name="description" content="Headtuff. Bonés street com bordado tom sobre tom. Drop 001, Coleção Sombra, em breve. Cabeça dura desde sempre.">
+<meta property="og:title" content="Headtuff · Drop 001">
+<meta property="og:description" content="Bonés street com bordado tom sobre tom. Cabeça dura desde sempre.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://headtuff.com/">
+<meta name="theme-color" content="#0E0E0D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230E0E0D'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='38' fill='%23F4F3EF'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Pinyon+Script&display=swap">
+<style>
+:root{
+  --bg:#F4F3EF; --fg:#0E0E0D; --muted:#6F6C66; --line:#DAD7D0; --ink:#0E0E0D; --paper:#F4F3EF;
+  --f:"Archivo","Helvetica Neue",Arial,sans-serif; --script:"Pinyon Script","Snell Roundhand",cursive;
+  --pad:clamp(16px,2.8vw,40px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:99}
+.up{text-transform:uppercase;letter-spacing:.08em}
+
+.bar{background:var(--ink);color:var(--paper);text-align:center;font-size:11px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;padding:9px var(--pad)}
+.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:14px var(--pad);position:sticky;top:0;background:var(--bg);z-index:20}
+.nav ul{display:flex;gap:clamp(16px,3vw,44px);list-style:none;margin:0;padding:0;font-size:12px;font-weight:600}
+.nav .logo{font-family:var(--script);font-size:clamp(34px,4.4vw,48px);line-height:1;padding:2px 8px}
+.nav .right{justify-self:end;display:flex;gap:20px;align-items:center}
+.nav svg{width:20px;height:20px;display:block}
+.nav a:hover{opacity:.6}
+@media (max-width:640px){.nav ul{gap:14px;font-size:11px}.nav .hide-s{display:none}}
+
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.3vw,18px);padding:28px var(--pad) 48px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.card{display:flex;flex-direction:column;gap:10px;background:none;border:0;padding:0;text-align:left;min-width:0}
+.tile{position:relative;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 35%,#FBFAF8 0%,#E6E4DE 60%,#D3D0C9 100%)}
+.tile.dark{background:radial-gradient(120% 90% at 50% 35%,#2A2927 0%,#161514 65%,#0B0B0A 100%)}
+.tile svg{width:86%;height:auto;transition:transform .5s cubic-bezier(.2,.7,.2,1);filter:drop-shadow(0 18px 14px rgba(0,0,0,.22))}
+.card:hover .tile svg{transform:scale(1.05) rotate(-2deg)}
+.flag{position:absolute;top:10px;left:10px;background:var(--ink);color:var(--paper);font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;border-radius:99px}
+.tile.dark .flag{background:var(--paper);color:var(--ink)}
+.card h3{margin:0;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.card .kind{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.card .price{font-weight:600;font-variant-numeric:tabular-nums}
+.refl{transition:fill .3s,filter .3s}
+.card:hover .refl-t,.lit .refl-t{fill:#EEF3FA!important}
+.card:hover .refl-g,.lit .refl-g{filter:drop-shadow(0 0 6px rgba(220,235,255,.9))}
+
+.banner{position:relative;background:var(--ink);color:var(--paper);min-height:min(78vh,720px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;overflow:hidden;padding:80px var(--pad)}
+.banner .ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--script);font-size:clamp(180px,38vw,620px);color:#1D1C1A;white-space:nowrap;transform:rotate(-9deg);pointer-events:none;user-select:none;line-height:1}
+.banner > *:not(.ghost){position:relative}
+.banner h2{margin:0;font-weight:800;font-size:clamp(40px,7.5vw,104px);line-height:.95;text-transform:uppercase;letter-spacing:-.01em}
+.banner p{margin:0;font-size:12px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;max-width:46ch}
+.btn{display:inline-block;background:var(--paper);color:var(--ink);font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;padding:15px 34px;border:1px solid var(--paper);transition:background .2s,color .2s}
+.btn:hover{background:transparent;color:var(--paper)}
+.btn.k{background:var(--ink);color:var(--paper);border-color:var(--ink);border-radius:99px}
+.btn.k:hover{background:transparent;color:var(--ink)}
+.banner .cap{width:min(520px,82vw)}
+
+.sec-h{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:44px var(--pad) 16px}
+.sec-h h2{margin:0;font-size:clamp(20px,2.2vw,26px);font-weight:800;text-transform:uppercase}
+.sec-h h2 span{color:#B9B6AF;margin-left:14px}
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,.9vw,12px);padding:0 var(--pad) 40px}
+@media (max-width:720px){.cols3{grid-template-columns:1fr}}
+.coll{position:relative;border:0;padding:0;background:none;text-align:center}
+.coll .tile{aspect-ratio:4/5}
+@media (max-width:720px){.coll .tile{aspect-ratio:16/11}.coll .tile svg{width:56%}}
+.coll .n{position:absolute;top:16px;left:16px;width:36px;height:36px;border-radius:50%;background:var(--paper);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+.coll .t{position:absolute;left:0;right:0;bottom:18px;font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.coll .tile.dark + .t,.coll.d .t{color:var(--paper)}
+
+.rail{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 var(--pad) 8px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rail .card{flex:0 0 clamp(210px,23vw,330px);scroll-snap-align:start}
+.arrows{display:flex;gap:8px}
+.arrows button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff}
+.arrows button:hover{background:var(--ink);color:var(--paper)}
+.center{display:flex;justify-content:center;padding:32px var(--pad) 56px}
+
+.insta{background:#fff;text-align:center;padding:56px var(--pad);display:flex;flex-direction:column;align-items:center;gap:18px}
+.insta h2{margin:0;font-size:clamp(22px,2.6vw,30px);font-weight:800;text-transform:uppercase}
+.insta .handle{font-family:var(--script);font-size:clamp(48px,7vw,84px);line-height:1}
+.promises{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--ink);background:#fff;padding:30px var(--pad);gap:20px;text-align:center}
+@media (max-width:640px){.promises{grid-template-columns:1fr}}
+.promises b{display:block;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.promises span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+footer{padding:56px var(--pad) 32px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+@media (max-width:720px){footer{grid-template-columns:1fr 1fr}}
+footer h4{margin:0 0 14px;font-size:16px;font-weight:500;letter-spacing:.2em;text-transform:uppercase}
+footer .brand{font-family:var(--script);font-size:44px;line-height:1;margin-bottom:8px}
+footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+footer a:hover{opacity:.6}
+.legal{padding:0 var(--pad) 32px;font-size:11px;color:var(--muted)}
+
+dialog{border:0;padding:0;max-width:min(940px,94vw);width:100%;background:var(--bg);color:var(--fg)}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+.pd{display:grid;grid-template-columns:1.1fr 1fr}
+@media (max-width:720px){.pd{grid-template-columns:1fr}}
+.pd .tile{aspect-ratio:1/1;height:100%}
+.pd .body{padding:clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:14px;min-width:0}
+.pd h3{margin:0;font-size:26px;font-weight:800;text-transform:uppercase;line-height:1.05}
+.pd .price{font-size:18px;font-weight:600}
+.pd ul{margin:0;padding-left:18px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.pd .small{font-size:12px;color:var(--muted)}
+.x{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;z-index:2}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#loja">Pular para os produtos</a>
+<div class="bar">Drop 001 em breve · Frete grátis acima de R$250</div>
+
+<nav class="nav" aria-label="Principal">
+  <ul>
+    <li><a class="up" href="#drop">001</a></li>
+    <li><a class="up" href="#loja">Loja</a></li>
+    <li class="hide-s"><a class="up" href="#contato">Contato</a></li>
+  </ul>
+  <a class="logo" href="#" aria-label="Headtuff, início">Headtuff</a>
+  <div class="right">
+    <a href="https://www.instagram.com/useheadtuff" target="_blank" rel="noopener" aria-label="Instagram da Headtuff">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg>
+    </a>
+  </div>
+</nav>
+
+<main>
+  <section id="loja" class="grid" aria-label="Produtos"></section>
+
+  <section id="drop" class="banner">
+    <div class="ghost" aria-hidden="true">Headtuff</div>
+    <h2>001 em breve</h2>
+    <p>Coleção Sombra. Seis bonés, bordado tom sobre tom, lote único de 300.</p>
+    <a class="btn" href="https://ig.me/m/useheadtuff" target="_blank" rel="noopener">Entrar na lista VIP</a>
+  </section>
+
+  <div class="sec-h"><h2>Compre por coleção</h2></div>
+  <section class="cols3" id="colecoes"></section>
+
+  <section class="banner lit" id="manifesto">
+    <div class="cap" id="heroCap"></div>
+    <h2>Cabeça dura</h2>
+    <p>Não precisa gritar o nome. Quem é da rua reconhece.</p>
+  </section>
+
+  <div class="sec-h">
+    <h2>001<span>Todos os produtos</span></h2>
+    <div class="arrows"><button id="prev" aria-label="Anterior">←</button><button id="next" aria-label="Próximo">→</button></div>
+  </div>
+  <section class="rail" id="rail" aria-label="Todos os produtos do drop 001"></section>
+  <div class="center"><a class="btn k" href="#loja">Ver tudo</a></div>
+
+  <section class="insta">
+    <h2>Acompanhe o drop</h2>
+    <div class="handle">@useheadtuff</div>
+    <a class="btn k" href="https://www.instagram.com/useheadtuff" target="_blank" rel="noopener">Seguir no Instagram</a>
+  </section>
+
+  <section class="promises">
+    <div><b>Lote único de 300</b><span>Acabou, não repõe</span></div>
+    <div><b>Frete grátis</b><span>Em pedidos acima de R$250</span></div>
+    <div><b>Troca em 30 dias</b><span>De cor ou tamanho</span></div>
+  </section>
+</main>
+
+<footer id="contato">
+  <div><div class="brand">Headtuff</div><div class="up" style="font-size:12px">Cabeça dura desde sempre.</div></div>
+  <div><h4>Loja</h4><ul><li><a href="#drop">001</a></li><li><a href="#loja">Todos os bonés</a></li><li><a href="#colecoes">Coleções</a></li></ul></div>
+  <div><h4>Ajuda</h4><ul><li><a href="https://ig.me/m/useheadtuff" target="_blank" rel="noopener">Fale com a gente</a></li><li><a href="https://ig.me/m/useheadtuff" target="_blank" rel="noopener">Lista VIP</a></li></ul></div>
+  <div><h4>Siga</h4><ul><li><a href="https://www.instagram.com/useheadtuff" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.tiktok.com/@useheadtuff" target="_blank" rel="noopener">TikTok</a></li></ul></div>
+</footer>
+<div class="legal">© 2026 Headtuff</div>
+
+<dialog id="dlg" aria-labelledby="dlgTitle"><button class="x" id="dlgClose" aria-label="Fechar">✕</button><div class="pd" id="dlgBody"></div></dialog>
+
+<script>
+const SCRIPT='"Pinyon Script","Snell Roundhand",cursive';
+const P=[
+ {id:'preto',n:'Sombra Preto',k:'Boné aba curva',p:129,crown:'#1A1918',thread:'#4B4844',rope:'#F1EDE4',d:'A peça base da coleção. Preto com cursiva em grafite e corda branca.'},
+ {id:'osso',n:'Sombra Osso',k:'Boné aba curva',p:129,crown:'#ECE7DC',thread:'#C9BFA9',rope:'#1A1918',d:'O inverso do preto. Osso com cursiva areia e corda preta.'},
+ {id:'marinho',n:'Sombra Marinho',k:'Boné aba curva',p:139,crown:'#141C33',thread:'#33416A',rope:'#F1EDE4',d:'Azul-marinho fechado com cursiva em azul aço.'},
+ {id:'garrafa',n:'Sombra Garrafa',k:'Boné aba curva',p:139,crown:'#1F3B2A',thread:'#3B5C45',rope:'#E0CFA8',d:'Verde garrafa com cursiva musgo e corda crua.'},
+ {id:'lavado',n:'Sombra Lavado',k:'Boné lavado',p:149,crown:'#3A3835',thread:'#6C6862',rope:'#E0CFA8',wash:1,d:'Preto estonado com aba desfiada. Cara de boné usado há anos.'},
+ {id:'flash',n:'Sombra Flash',k:'Edição numerada · 50 unidades',p:179,crown:'#121212',thread:'#2C2C2C',rope:'#2C2C2C',refl:1,big:1,dark:1,flag:'Numerado',d:'Cursiva gigante em linha refletiva. No escuro some, no flash da câmera acende.'}
+];
+let uid=0;
+function cap(o){
+  const i=uid++, brim='M62,204 Q200,238 338,204 C354,232 318,272 200,276 C82,272 46,232 62,204 Z',
+        crown='M60,205 C50,108 108,44 200,44 C292,44 350,108 340,205 Q200,240 60,205 Z',
+        line=o.dark||o.crown<'#5'?'rgba(255,255,255,.22)':'rgba(0,0,0,.3)';
+  const t=o.big
+   ?`<g class="refl refl-g"><text class="refl refl-t" x="200" y="172" text-anchor="middle" font-family='${SCRIPT}' font-size="118" fill="${o.thread}" transform="rotate(-11 200 150)">Headtuff</text></g>`
+   :`<text x="200" y="166" text-anchor="middle" font-family='${SCRIPT}' font-size="84" fill="${o.thread}" transform="rotate(-6 200 150)">Headtuff</text>`;
+  return `<svg viewBox="0 0 400 300" role="img" aria-label="Boné ${o.n}">
+  <defs><clipPath id="c${i}"><path d="${crown}"/></clipPath>
+  <linearGradient id="s${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".13"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".26"/></linearGradient>
+  <radialGradient id="w${i}" cx=".5" cy=".45" r=".6"><stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+  <path d="${brim}" fill="${o.crown}" stroke="${line}" stroke-width="1.2"/>
+  <path d="M78,230 Q200,262 322,230" fill="none" stroke="#888" stroke-opacity=".35" stroke-dasharray="4 3"/>
+  ${o.wash?`<path d="${brim}" fill="url(#w${i})"/>`:''}
+  <path d="${crown}" fill="${o.crown}" stroke="${line}" stroke-width="1.2"/>
+  ${o.wash?`<path d="${crown}" fill="url(#w${i})"/>`:''}
+  <g clip-path="url(#c${i})">
+   <path d="M200,44 C146,72 112,134 106,220 M200,44 C254,72 288,134 294,220" fill="none" stroke="#888" stroke-opacity=".35" stroke-width="1.2"/>
+   <circle cx="140" cy="84" r="3" fill="none" stroke="#888" stroke-opacity=".55" stroke-width="1.3"/><circle cx="260" cy="84" r="3" fill="none" stroke="#888" stroke-opacity=".55" stroke-width="1.3"/>
+   ${t}<path d="${crown}" fill="url(#s${i})"/>
+  </g>
+  <path d="M61,204 Q200,239 339,204" fill="none" stroke="${o.rope}" stroke-width="5.5" stroke-linecap="round"/>
+  <path d="M61,204 Q200,239 339,204" fill="none" stroke="#000" stroke-opacity=".28" stroke-width="5.5" stroke-dasharray="2 4"/>
+  <ellipse cx="200" cy="43" rx="13" ry="6" fill="${o.crown}" stroke="${line}" stroke-width="1.2"/></svg>`;
+}
+const brl=v=>'R$ '+v.toFixed(2).replace('.',',');
+const card=o=>`<button class="card" data-id="${o.id}" aria-label="${o.n}, ${o.pl||brl(o.p)}">
+  <div class="tile${o.dark?' dark':''}">${o.flag?`<span class="flag">${o.flag}</span>`:''}${cap(o)}</div>
+  <h3>${o.n}</h3><span class="kind">${o.k}</span><span class="price">${o.pl||brl(o.p)}</span></button>`;
+const by=id=>P.find(p=>p.id===id);
+
+const order=['preto','flash','osso','marinho','garrafa','lavado'];
+document.getElementById('loja').innerHTML=order.map(id=>card(by(id))).join('')+
+  card({...by('preto'),k:'Leve 2 por R$ 239,00',n:'Combo 2 bonés',p:239,id:'combo',flag:'Oferta'})+
+  card({...by('osso'),k:'Em breve',n:'Lista VIP',pl:'Acesso 1h antes',id:'vip'});
+document.getElementById('rail').innerHTML=P.map(card).join('');
+document.getElementById('heroCap').innerHTML=cap(by('flash'));
+document.getElementById('colecoes').innerHTML=[
+  ['01','Sombra',by('osso'),''],['02','Flash',by('flash'),' d'],['03','Todos os bonés',by('garrafa'),'']
+].map(c=>`<a class="coll${c[3]}" href="#loja"><div class="tile${c[2].dark?' dark':''}">${cap(c[2])}</div><span class="n">${c[0]}</span><span class="t">${c[1]}</span></a>`).join('');
+
+const dlg=document.getElementById('dlg'), body=document.getElementById('dlgBody');
+function open(id){
+  if(id==='vip'){window.open('https://ig.me/m/useheadtuff','_blank','noopener');return}
+  const combo=id==='combo', o=combo?by('preto'):by(id);
+  body.innerHTML=`<div class="tile${o.dark?' dark':''} lit">${cap(o)}</div><div class="body">
+   <span class="kind up" style="font-size:11px;color:var(--muted)">Drop 001 · ${combo?'Oferta de lançamento':o.k}</span>
+   <h3 id="dlgTitle">${combo?'Combo 2 bonés':o.n}</h3>
+   <div class="price">${brl(combo?239:o.p)}</div>
+   <p style="margin:0">${combo?'Escolha dois bonés da Coleção Sombra por um preço fechado. O Sombra Flash não entra no combo.':o.d}</p>
+   <ul><li>Bordado tom sobre tom na frente</li><li>Corda trançada entre a copa e a aba</li><li>Número 001 na lateral esquerda</li><li>Regulagem traseira com fivela</li></ul>
+   <a class="btn k" style="text-align:center" href="https://ig.me/m/useheadtuff" target="_blank" rel="noopener">Reservar pelo Instagram</a>
+   <span class="small">O drop ainda não abriu. Quem entra na lista VIP compra uma hora antes do público. Pix com 5% de desconto ou 3x sem juros.</span></div>`;
+  dlg.showModal();
+}
+document.addEventListener('click',e=>{const c=e.target.closest('.card');if(c)open(c.dataset.id)});
+document.getElementById('dlgClose').onclick=()=>dlg.close();
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+const rail=document.getElementById('rail');
+document.getElementById('prev').onclick=()=>rail.scrollBy({left:-rail.clientWidth*.8,behavior:'smooth'});
+document.getElementById('next').onclick=()=>rail.scrollBy({left:rail.clientWidth*.8,behavior:'smooth'});
+</script>
+</body>
+</html>
