@@ -279,8 +279,8 @@ const IMG={
  preto:{pk:['#F7F7F7','#F8F8F8'],m:3},
  osso:{pk:['#C4C4C6','#DFDEE0'],m:3},
  marinho:{pk:['#CCCCCC','#E6E6E6'],m:3},
- garrafa:{m:1},
- lavado:{m:3}
+ garrafa:{pk:['#DADADC','#DBDBDE'],m:2},
+ lavado:{pk:['#DBDBDC','#DADADC'],m:3}
 };
 const pics=id=>{const g=IMG[id],a=[];if(!g)return a;if(g.pk)a.push({f:id+'-packshot',pk:g.pk});for(let i=1;i<=g.m;i++)a.push({f:`${id}-modelo-${i}`});return a};
 const src=(f,sizes)=>`src="img/${f}-sm.webp" srcset="img/${f}-sm.webp 640w, img/${f}.webp 1600w" sizes="${sizes}"`;
@@ -366,7 +366,7 @@ function open(id){
   }
 }
 // Lookbook: todas as fotos de modelo, alternando os bonés.
-const LB=[['preto',1],['marinho',1],['garrafa',1],['lavado',1],['osso',1],['preto',2],['marinho',2],['lavado',2],['osso',2],['preto',3],['marinho',3],['lavado',3],['osso',3]];
+const LB=[['preto',1],['marinho',1],['garrafa',1],['lavado',1],['osso',1],['preto',2],['marinho',2],['garrafa',2],['lavado',2],['osso',2],['preto',3],['marinho',3],['lavado',3],['osso',3]];
 document.getElementById('lookbook').innerHTML=LB.map(([id,i])=>{const o=by(id);
   return `<button class="lk" data-id="${id}" aria-label="Ver o boné ${o.n}"><div class="ph"><img ${src(`${id}-modelo-${i}`,'(max-width:900px) 70vw, 26vw')} alt="Modelo usando o boné ${o.n}" loading="lazy" decoding="async"></div><span>${o.n}<small>${brl(o.p)}</small></span></button>`}).join('');
 document.addEventListener('click',e=>{const c=e.target.closest('.card,.lk');if(c)open(c.dataset.id)});
