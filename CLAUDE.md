@@ -39,6 +39,7 @@ Os prompts de foto seguem a skill `.claude/skills/sketch-to-studio-product`.
 
 ## Site
 - `index.html` é o site inteiro, sem etapa de build. Os dados dos bonés ficam na lista `P` do script.
+- Abertura do site: seção `#hero` com o vídeo `video/hero.mp4` (e `hero.webm`). O vídeo toca uma vez, sem som, e para no último quadro (o bordado "Headtuff" em macro); só então aparece a legenda no rodapé. Sobre o vídeo o menu fica transparente e sem logo. Em tela em pé o vídeo aparece inteiro, em faixa. `video/hero-inicio.webp` e `video/hero-fim.webp` são o primeiro e o último quadro. Para trocar o vídeo, substituir esses quatro arquivos.
 - Fotos reais em `img/`, em WebP: `<boné>-packshot.webp` e `<boné>-modelo-N.webp` (até 1600 px de largura) e uma versão `-sm` de 640 px para cards e carrosséis. O objeto `IMG` no script diz quais fotos cada boné tem. Boné sem entrada em `IMG` (hoje o Sombra Flash) cai na ilustração SVG de reserva.
 - Para adicionar foto: converter para WebP nas duas larguras, salvar em `img/` com esse padrão de nome e atualizar `IMG` (e a lista `LB` do lookbook, se for foto de modelo).
 - Ordem das seções, inspirada no Wants and Needs: barra preta de aviso, menu com logo no centro, grade de produtos, banner "001 em breve", coleções ## Última tarefa concluída (13/11/2026)

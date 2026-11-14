@@ -37,6 +37,41 @@ button{font:inherit;color:inherit;cursor:pointer}
 .nav svg{width:20px;height:20px;display:block}
 .nav a:hover{opacity:.6}
 @media (max-width:640px){.nav ul{gap:14px;font-size:11px}.nav .hide-s{display:none}}
+/* Sobre o vídeo de abertura o menu fica transparente e sem logo: o bordado do vídeo é o logo. */
+.nav{transition:background .4s,color .4s}
+.nav .logo{transition:opacity .4s}
+.nav.over{background:transparent;color:var(--paper)}
+.nav.over .logo{opacity:0;pointer-events:none}
+
+.hero{position:relative;height:100vh;height:min(calc(100svh - var(--barh,34px)),56.25vw);min-height:420px;margin-top:calc(-1*var(--navh,72px));background:var(--ink);color:var(--paper);overflow:hidden;display:flex;align-items:flex-end}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero::before,.hero::after{content:"";position:absolute;left:0;right:0;pointer-events:none;z-index:1}
+.hero::before{top:0;height:150px;background:linear-gradient(rgba(14,14,13,.5),rgba(14,14,13,0))}
+.hero::after{bottom:0;height:26%;background:linear-gradient(rgba(14,14,13,0),rgba(14,14,13,.72));opacity:0;transition:opacity 1.2s ease}
+.hero.settled::after{opacity:1}
+/* Uma linha só no rodapé do vídeo, como legenda de filme, para não cobrir o bordado. */
+.hero .in{position:relative;z-index:2;width:100%;padding:0 var(--pad) clamp(22px,4vh,40px);display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;gap:20px;visibility:hidden}
+.hero.settled .in{visibility:visible}
+.hero .in > *{opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.hero.settled .in > *{opacity:1;transform:none}
+.hero.settled .in > .line{transition-delay:.15s}
+.hero.settled .in > .go{transition-delay:.3s}
+.hero h1{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);margin:0}
+.hero .eye{margin:0;font-size:11px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(244,243,239,.72)}
+.hero .line{margin:0;font-size:clamp(15px,1.35vw,19px);font-weight:500;letter-spacing:.01em;text-align:center}
+.hero .go{justify-self:end;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid currentColor}
+.hero .go:hover{opacity:.6}
+/* Tela em pé: o vídeo aparece inteiro, em faixa, para o bordado não ser cortado. */
+@media (max-aspect-ratio:1/1){
+  .hero{height:auto;min-height:0;flex-direction:column;align-items:stretch;padding-top:calc(var(--navh,72px) + 7vh)}
+  .hero video{position:relative;inset:auto;height:auto;aspect-ratio:16/9;
+    -webkit-mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent)}
+  .hero::before,.hero::after{display:none}
+  .hero .in{grid-template-columns:1fr;justify-items:start;gap:12px;padding:5vh var(--pad) 6vh}
+  .hero .line{text-align:left;font-size:19px}
+  .hero .go{justify-self:start;margin-top:6px}
+}
+#loja{scroll-margin-top:var(--navh,72px)}
 
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.3vw,18px);padding:28px var(--pad) 48px}
 @media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -145,7 +180,7 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 <a class="skip" href="#loja">Pular para os produtos</a>
 <div class="bar">Drop 001 em breve · Frete grátis acima de R$250</div>
 
-<nav class="nav" aria-label="Principal">
+<nav class="nav over" aria-label="Principal">
   <ul>
     <li><a class="up" href="#drop">001</a></li>
     <li><a class="up" href="#loja">Loja</a></li>
@@ -160,6 +195,19 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 </nav>
 
 <main>
+  <section class="hero" id="hero" aria-label="Abertura">
+    <video muted playsinline preload="auto" poster="video/hero-inicio.webp" aria-hidden="true" tabindex="-1">
+      <source src="video/hero.mp4" type="video/mp4">
+      <source src="video/hero.webm" type="video/webm">
+    </video>
+    <div class="in">
+      <h1>Headtuff</h1>
+      <p class="eye">Drop 001 · Coleção Sombra</p>
+      <p class="line">Não precisa gritar o nome.</p>
+      <a class="go" href="#loja">Ver os bonés</a>
+    </div>
+  </section>
+
   <section id="loja" class="grid" aria-label="Produtos"></section>
 
   <section id="drop" class="banner">
@@ -329,6 +377,25 @@ const arrows=(r,p,n)=>{const el=document.getElementById(r);
   document.getElementById(n).onclick=()=>el.scrollBy({left:el.clientWidth*.8,behavior:'smooth'})};
 arrows('rail','prev','next');
 arrows('lookbook','lbPrev','lbNext');
+
+// Abertura: o vídeo toca uma vez e para no último quadro. Só então o texto aparece.
+(()=>{
+  const hero=document.getElementById('hero'),v=hero.querySelector('video'),nav=document.querySelector('.nav'),bar=document.querySelector('.bar'),root=document.documentElement;
+  const size=()=>{root.style.setProperty('--navh',nav.offsetHeight+'px');root.style.setProperty('--barh',bar.offsetHeight+'px')};
+  size();new ResizeObserver(size).observe(nav);
+  new IntersectionObserver(([e])=>nav.classList.toggle('over',e.isIntersecting),{rootMargin:'-90px 0px 0px 0px'}).observe(hero);
+  const settle=()=>hero.classList.add('settled');
+  // Sem animação (preferência do aparelho, economia de bateria ou falha no vídeo): mostra direto o quadro final.
+  const still=()=>{v.poster='video/hero-fim.webp';v.pause();
+    const end=()=>{try{v.currentTime=Math.max(0,v.duration-.05)}catch(e){}};
+    v.readyState>=1?end():v.addEventListener('loadedmetadata',end,{once:true});settle()};
+  v.addEventListener('ended',settle);
+  v.addEventListener('timeupdate',()=>{if(v.duration&&v.duration-v.currentTime<.7)settle()});
+  v.addEventListener('error',still,true);
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)still();
+  else{const p=v.play();if(p)p.catch(still)}
+  setTimeout(settle,9000);
+})();
 </script>
 </body>
 </html>
